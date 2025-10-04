@@ -70,7 +70,7 @@ exports.protect = async (req, res, next) => {
     let token;
     if (
       req.headers.authorization &&
-      res.headers.authorization.startsWith('bearer')
+      req.headers.authorization.startsWith('bearer')
     ) {
       req.headers.authorization.split(' ')[1];
     } else if (req.cookie.jwt) {
@@ -131,7 +131,7 @@ exports.forgotPassword = async (req, res, next) => {
       .update(resetToken)
       .digest('hex');
 
-    user.passwordResetExpires(Date.now() + 10 * 60 * 1000);
+    user.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
     await user.save({ validateBeforeSave: false });
 
