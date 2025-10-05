@@ -2,7 +2,7 @@ const express = require('express');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const uploadController = require('../controllers/uploadController');
-const { uploadImage } = require('../controllers/uploadController');
+const paymentController = require('../controllers/paymentController');
 
 const router = express.Router();
 
@@ -23,6 +23,7 @@ router.post(
   uploadController.uploadImage,
   uploadController.handleImageUpload,
 );
+router.post('/upgrade', paymentController.fakeUpgrade);
 
 router.use(authController.restrictTo('admin'));
 
